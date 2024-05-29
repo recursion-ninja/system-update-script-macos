@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PURGATORY_PROTOCOL_LABELING="Purgatory Protocol"
-PURGATORY_PROTOCOL_PLATFORM="Debian"
+PURGATORY_PROTOCOL_PLATFORM="MacOS"
 PURGATORY_PROTOCOL_VERMAJOR=1
 PURGATORY_PROTOCOL_VERMINOR=2
 PURGATORY_PROTOCOL_VERPATCH=0
@@ -43,33 +43,33 @@ run_show_none()
     fi 
 }
 
-super_user_do()
-{
-    if [[ "$UID" -eq 0 ]]; then
-        "${@}" <<< "${PURGATORY_PROTOCOL_PASSWORD}"
-    else
-        sudo -S -p '' "${@}" <<< "${PURGATORY_PROTOCOL_PASSWORD}"
-    fi
-}
-
-super_user_prompt()
-{
-    print_ruler
-    printf '%s %s [%s]\n' "${BAR}" "${PURGATORY_PROTOCOL_LABELING}" "${PURGATORY_PROTOCOL_PLATFORM}"
-    printf '%s Version %d.%d.%d\n' "${BAR}" \
-        "${PURGATORY_PROTOCOL_VERMAJOR}" \
-        "${PURGATORY_PROTOCOL_VERMINOR}" \
-        "${PURGATORY_PROTOCOL_VERPATCH}"
-    print_ruler
-    printf "\n"
-    
-    if [ "$(id -nu)" != "root" ]; then
-        printf 'Invoking %s requires "super-user" privilege.\n' "${PURGATORY_PROTOCOL_LABELING}"
-        sudo -k
-        read -s -p "[sudo] Password for user ${USER}: " PURGATORY_PROTOCOL_PASSWORD
-        printf '\n'
-    fi
-}
+#super_user_do()
+#{
+#    if [[ "$UID" -eq 0 ]]; then
+#        "${@}" <<< "${PURGATORY_PROTOCOL_PASSWORD}"
+#    else
+#        sudo -S -p '' "${@}" <<< "${PURGATORY_PROTOCOL_PASSWORD}"
+#    fi
+#}
+#
+#super_user_prompt()
+#{
+#    print_ruler
+#    printf '%s %s [%s]\n' "${BAR}" "${PURGATORY_PROTOCOL_LABELING}" "${PURGATORY_PROTOCOL_PLATFORM}"
+#    printf '%s Version %d.%d.%d\n' "${BAR}" \
+#        "${PURGATORY_PROTOCOL_VERMAJOR}" \
+#        "${PURGATORY_PROTOCOL_VERMINOR}" \
+#        "${PURGATORY_PROTOCOL_VERPATCH}"
+#    print_ruler
+#    printf "\n"
+#    
+#    if [ "$(id -nu)" != "root" ]; then
+#        printf 'Invoking %s requires "super-user" privilege.\n' "${PURGATORY_PROTOCOL_LABELING}"
+#        sudo -k
+#        read -s -p "[sudo] Password for user ${USER}: " PURGATORY_PROTOCOL_PASSWORD
+#        printf '\n'
+#    fi
+#}
 
 update_purge_homebrew()
 {
@@ -113,7 +113,7 @@ update_purge_stack()
 
 # Check that the script is running as root. If not, then prompt for the sudo
 # password and re-execute this script with sudo.
-super_user_prompt
+#super_user_prompt
 
 update_purge_homebrew
 
