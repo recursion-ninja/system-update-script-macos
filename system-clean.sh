@@ -22,7 +22,7 @@ remove_named_matching()
     local dirpath=$( envsubst <<< "$2" )
     local pattern=$3
     printf "  %s:\n" "${infostr}"
-    DELETION_TARGETS=$( find "${dirpath}" -type d -regex "${pattern}" )
+    DELETION_TARGETS=$( find "${dirpath}" -type d -name "${pattern}" )
     if [[ -z "${DELETION_TARGETS}" ]]; then
         printf "    "
         print_none
